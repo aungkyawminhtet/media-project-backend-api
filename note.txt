@@ -1,0 +1,55 @@
+npm init -y => to start project
+npm install typescript ts-node @types/node --save-dev => to install typescript and ts-node
+npx tsc --init => to create tsconfig.json file
+
+
+//package file
+npm i express
+npm install @types/express --save-dev
+npm install --save-dev nodemon
+npm i dotenv
+npm i mongoose
+npm i express-fileupload
+npm install --save-dev @types/express-fileupload
+npm i joi
+npm i bcryptjs
+npm i jsonwebtoken
+npm i --save-dev @types/jsonwebtoken
+
+//modify package.json scripts
+"scripts": {
+  "dev": "nodemon --exec ts-node src/index.ts",
+  "build": "tsc",
+  "start": "node dist/index.js"
+}
+
+//to get request body data 
+app.use(express.json());
+
+
+//data usage
+data.find(data => data.id === id);
+DB.find();
+DB.findById(id);
+new DB(req.body).save();
+DB.findByIdAndUpdate(id, req.body);
+DB.findByIdAndDelete(id);
+
+//error handling middleware
+app.use((err: any, req: Request, res: Response, next: NextFunction) => {
+    const  status = err.status || 200;
+    res.status(status).json({
+        success: false,
+        message: err.message,
+    });
+});
+
+
+//other notics
+DB.findById(id).populate('user','-password - __v');
+DB.findById(id).select('- __v');
+let createToken = token(user.toObject());  => need to chage user to toObject();
+
+
+// Alret - to know
+when send image file set name - "photo" in postman
