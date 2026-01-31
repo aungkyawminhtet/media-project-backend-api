@@ -33,6 +33,11 @@ export const validateParam = (schema: any, name: string)=> {
 }
 
 export const validateToken = async(req: Request, res: Response, next: NextFunction) => {
+    
+    if(!req.headers.authorization){
+        next(new Error("unauthorized  Error"));
+    }
+
     let token:any = req.headers.authorization?.split(" ")[1];
     let scecrectKey:any = process.env.SECRET_KEY || 'secrectkey';
     if (!token) {

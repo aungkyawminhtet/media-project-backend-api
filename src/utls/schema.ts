@@ -4,6 +4,7 @@ export const catSchema = {
   bodySchema: Joi.object({
     name: Joi.string().required(),
     image: Joi.string().required(),
+    user: Joi.optional()
   }),
 
   paramSchema: Joi.object({
@@ -26,6 +27,14 @@ export const postSchema = {
   }),
 };
 
+export const tagSchema = {
+  bodySchema: Joi.object({
+    name: Joi.string().required(),
+    image: Joi.string().required(),
+    user: Joi.optional()
+  })
+}
+
 export const userSchema = {
   bodySchema: Joi.object({
     name: Joi.string().required(),
@@ -33,6 +42,7 @@ export const userSchema = {
     phone: Joi.string().required().min(9).max(11),
     password: Joi.string().required().min(8).max(16),
   }),
+
   loginSchema: Joi.object({
     email: Joi.string().required().email(),
     password: Joi.string().required().min(8).max(16),

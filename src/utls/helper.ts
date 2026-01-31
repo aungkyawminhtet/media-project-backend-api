@@ -6,7 +6,7 @@ const fMs = async(res: Response, msg:string, result: any[]) => {
     res.status(200).json({
         con: true,
         msg,
-        result
+        data: result
     });
 }
 
