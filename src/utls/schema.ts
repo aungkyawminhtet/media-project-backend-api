@@ -9,6 +9,7 @@ export const catSchema = {
 
   paramSchema: Joi.object({
     id: Joi.string().regex(/^[0-9a-f-A-F]{24}$/),
+    user: Joi.optional()
   }),
 
   imageSchema: Joi.object({
@@ -17,12 +18,24 @@ export const catSchema = {
   }),
 };
 
+export const commandSchema = {
+  bodySchema: Joi.object({
+    user: Joi.optional(),
+    post: Joi.optional(),
+    name: Joi.string().required(),
+    email: Joi.string().required().email(),
+    context: Joi.string().required(),
+  })
+}
+
 export const postSchema = {
   bodySchema: Joi.object({
     cat: Joi.string().regex(/^[0-9a-f-A-F]{24}$/),
+    tag: Joi.string().regex(/^[0-9a-f-A-F]{24}$/),
     image: Joi.string().required(),
     name: Joi.string().required(),
     desc: Joi.string().required(),
+    title: Joi.string().required(),
     user: Joi.optional()
   }),
 };

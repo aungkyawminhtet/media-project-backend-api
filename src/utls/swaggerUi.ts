@@ -15,7 +15,8 @@ const options = {
     ],
   },
   apis: [
-    "./src/routes/*.ts",   // 👈 where your route docs are
+    "./src/routes/*.ts", 
+    "./src/utls/schema.ts",
     "./src/index.ts"
   ],
 };

@@ -50,6 +50,7 @@ app.use((err: any, req: Request, res: Response, next: NextFunction) => {
 //other notics
 DB.findById(id).populate('user','-password - __v');
 DB.findById(id).select('- __v');
+DB.findById(id).select('name email');
 let createToken = token(user.toObject());  => need to chage user to toObject();
 
 

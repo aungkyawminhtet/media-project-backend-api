@@ -32,26 +32,29 @@ export const validateParam = (schema: any, name: string)=> {
     }
 }
 
-export const validateToken = async(req: Request, res: Response, next: NextFunction) => {
+export const validateToken = async(req: any, res: Response, next: NextFunction) => {
+
     
     if(!req.headers.authorization){
         next(new Error("unauthorized  Error"));
     }
-
+    
     let token:any = req.headers.authorization?.split(" ")[1];
     let scecrectKey:any = process.env.SECRET_KEY || 'secrectkey';
     if (!token) {
         next(new Error("unauthorized user one"));
     }
-    const user:any = jwt.decode(token,scecrectKey);
+
+    let user:any = jwt.decode(token,scecrectKey);
+
     
     if (!user) {
         next(new Error("unauthorized user two"));
     }
-    const findUser = await DB.findById(user._id).select("-password -__v");
-    req.body["user"] = findUser;
+    
+    let findUser = await DB.findById(user._id).select("-password -__v");
 
-    // console.log(req.body);
+    req.user = findUser;
 
     next();
 }

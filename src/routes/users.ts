@@ -11,6 +11,7 @@ const router = express.Router();
 //  *   description: User management
 //  */
 
+
 /**
  * @swagger
  * /api/v1/users/register:
@@ -79,8 +80,21 @@ router.post("/login", [validator(userSchema.loginSchema),login]);
  *           application/json:
  *             schema:
  *               type: array
- *               items:
- *                 $ref: '#/components/schemas/User'
+ *               required:
+ *                 - name
+ *                 - email
+ *                 - phone
+ *                 - createdAt
+ *               properties:
+ *                 name:
+ *                   type: string
+ *                 email:
+ *                   type: string
+ *                 phone:
+ *                   type: string
+ *                 createdAt:
+ *                   type: string
+ *                 
  */
 
 /**
@@ -101,15 +115,37 @@ router.get("/",getall);
  *       required: true
  *       content:
  *         application/json:
- *           schema:
- *             $ref: '#/components/schemas/User'
+ *          schema:
+ *             type: object
+ *             required:
+ *               - email
+ *               - password
+ *               - phone
+ *             properties:
+ *               email:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *               phone:
+ *                 type: string
  *     responses:
  *       201:
  *         description: User created successfully
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/User'
+ *             type: object
+ *             required:
+ *               - email
+ *               - password
+ *               - phone
+ *             properties:
+ *               email:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *               phone:
+ *                 type: string
  */
 
 router.post("/", createUser);
@@ -132,7 +168,8 @@ router.post("/", createUser);
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/User'
+ *               Users:
+ *                 type: object
  */ 
 router.get("/:id", getUserbByid);
 
@@ -153,14 +190,14 @@ router.get("/:id", getUserbByid);
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/User'
+ *             $ref: '#/components/schemas/userSchema'
  *     responses:
  *       200:
  *         description: User updated successfully
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/User'
+ *               $ref: '#/components/schemas/userSchema'
  */
 router.patch("/:id", updateUser);
 

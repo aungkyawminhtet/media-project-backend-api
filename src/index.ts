@@ -6,7 +6,6 @@ import { swaggerSpec } from './utls/swaggerUi';
 
 const swaggerUi = require('swagger-ui-express');
 
-
 const uploadFile = require('express-fileupload');
 
 const app = express();
@@ -22,11 +21,13 @@ const userRouter = require('./routes/users');
 const postRouter = require('./routes/posts');
 const catRouter = require('./routes/cats');
 const tagRouter = require("./routes/tag");
+const commandRouter = require("./routes/commands");
 
 app.use('/api/v1/users',userRouter);
 app.use('/api/v1/posts',postRouter);
 app.use('/api/v1/cats',catRouter);
 app.use('/api/v1/tag', tagRouter);
+app.use('/api/v1/commands', commandRouter);
 
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {
     const status = err.status || 200;
