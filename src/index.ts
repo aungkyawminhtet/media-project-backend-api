@@ -26,7 +26,7 @@ const commandRouter = require("./routes/commands");
 app.use('/api/v1/users',userRouter);
 app.use('/api/v1/posts',postRouter);
 app.use('/api/v1/cats',catRouter);
-app.use('/api/v1/tag', tagRouter);
+app.use('/api/v1/tags', tagRouter);
 app.use('/api/v1/commands', commandRouter);
 
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {

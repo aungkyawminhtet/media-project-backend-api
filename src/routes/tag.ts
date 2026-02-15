@@ -11,7 +11,50 @@ import { saveFile } from "../utls/saveFiles";
 import { catSchema, tagSchema } from "../utls/schema";
 import { validateToken, validator, validateParam } from "../utls/validator";
 
+/**
+ * @swagger
+ * tags:
+ *   name: Tags
+ *   description: Tag management
+ */
+
+/**
+ * @swagger
+ * /api/v1/tags:
+ *   get:
+ *     summary: Get all tags
+ *     tags: [Tags]
+ *     responses:
+ *       200:
+ *         description: List of tags
+ */
 router.get("/", GetAllTag);
+
+/**
+ * @swagger
+ * /api/v1/tags:
+ *   post:
+ *     summary: Create tag
+ *     tags: [Tags]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         multipart/form-data:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - name
+ *               - image
+ *             properties:
+ *               name:
+ *                 type: string
+ *               image:
+ *                 type: string
+ *                 format: binary
+ *     responses:
+ *       201:
+ *         description: Created successfully
+ */
 router.post(
   "/",
   validateToken,
@@ -20,10 +63,87 @@ router.post(
   CreateTag,
 );
 
-router
-  .route("/:id")
-  .get(validateParam(catSchema.paramSchema, "id"), GetTagById)
-  .patch(validateParam(catSchema.paramSchema, "id"), updateTag)
-  .delete(validateParam(catSchema.paramSchema, "id"), deleteTag);
+
+/**
+ * @swagger
+ * /api/v1/tags/{id}:
+ *   get:
+ *     summary: Get tag by id
+ *     tags: [Tags]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Tag detail
+ */
+router.get("/:id", validateParam(catSchema.paramSchema, "id"), GetTagById);
+
+
+/**
+ * @swagger
+ * /api/v1/tags/{id}:
+ *   patch:
+ *     summary: Update tag
+ *     tags: [Tags]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *     requestBody:
+ *       content:
+ *         multipart/form-data:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *               image:
+ *                 type: string
+ *                 format: binary
+ *     responses:
+ *       200:
+ *         description: Updated successfully
+ */
+router.patch(
+  "/:id",
+  validateToken,
+  validateParam(catSchema.paramSchema, "id"),
+  updateTag,
+);
+
+/**
+ * @swagger
+ * /api/v1/tags/{id}:
+ *   delete:
+ *     summary: Delete tag
+ *     tags: [Tags]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Deleted successfully
+ */
+router.delete(
+  "/:id",
+  validateToken,
+  validateParam(catSchema.paramSchema, "id"),
+  deleteTag,
+);
+
+// router
+//   .route("/:id")
+//   .get(validateParam(catSchema.paramSchema, "id"), GetTagById)
+//   .patch(validateParam(catSchema.paramSchema, "id"), updateTag)
+//   .delete(validateParam(catSchema.paramSchema, "id"), deleteTag);
 
 module.exports = router;

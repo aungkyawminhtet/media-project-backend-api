@@ -4,12 +4,12 @@ import { userSchema } from '../utls/schema';
 import { validator } from '../utls/validator';
 const router = express.Router();
 
-// /**
-//  * @swagger
-//  * tags:
-//  *   name: Users Login
-//  *   description: User management
-//  */
+/**
+ * @swagger
+ * tags:
+ *   name: Users Login
+ *   description: User management
+ */
 
 
 /**
@@ -25,10 +25,13 @@ const router = express.Router();
  *           schema:
  *             type: object
  *             required:
+ *               - name
  *               - email
  *               - password
  *               - phone
  *             properties:
+ *               name:
+ *                 type: string
  *               email:
  *                 type: string
  *               password:
@@ -93,8 +96,7 @@ router.post("/login", [validator(userSchema.loginSchema),login]);
  *                 phone:
  *                   type: string
  *                 createdAt:
- *                   type: string
- *                 
+ *                   type: string                
  */
 
 /**
@@ -118,10 +120,13 @@ router.get("/",getall);
  *          schema:
  *             type: object
  *             required:
+ *               - name
  *               - email
  *               - password
  *               - phone
  *             properties:
+ *               name:
+ *                 type: string
  *               email:
  *                 type: string
  *               password:
@@ -190,14 +195,37 @@ router.get("/:id", getUserbByid);
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/userSchema'
+ *             type: object
+ *             required:
+ *               - email
+ *               - password
+ *               - phone
+ *             properties:
+ *               email: 
+ *                 type: string
+ *               password:
+ *                 type: string
+ *               phone:
+ *                 type: string
  *     responses:
  *       200:
  *         description: User updated successfully
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/userSchema'
+ *               type: object
+ *             required:
+ *               - email
+ *               - password
+ *               - phone
+ *             properties:
+ *               email: 
+ *                 type: string
+ *               password:
+ *                 type: string
+ *               phone:
+ *                 type: string
+ *              
  */
 router.patch("/:id", updateUser);
 
