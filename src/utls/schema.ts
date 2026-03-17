@@ -18,6 +18,17 @@ export const catSchema = {
   }),
 };
 
+export const AllSchema = {
+  idSchema : Joi.object({
+    id: Joi.string().regex(/^[0-9a-f-A-F]{24}$/),
+    user: Joi.optional(),
+  }),
+  
+  pageSchema: Joi.object({
+    page: Joi.number().required()
+  })
+}
+
 export const commandSchema = {
   bodySchema: Joi.object({
     user: Joi.optional(),

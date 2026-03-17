@@ -19,6 +19,9 @@ const getCommandsById = async(req: Request, res: Response, next : NextFunction) 
 
 const getCommandsByPostId = async(req: Request, res: Response, next: NextFunction) => {
     const cmds = await DB.find({post: req.params.postId});
+    if(!cmds){
+        next(new Error("Commands not found with this post id"));
+    }
     fMs(res, "Commands fetched successfully", cmds);
 }
 
@@ -45,6 +48,10 @@ const updateCommand = async(req: Request, res: Response, next: NextFunction) => 
 }
 
 const delCommand = async(req: Request, res: Response, next: NextFunction) => {
+    let cmd = await DB.findById(req.params.id);
+    if(!cmd) {
+        next(new Error("Command not found with that id!"));
+    }
     await DB.findByIdAndDelete(req.params.id);
     fMs(res, "Command deleted successfully", []);
 }

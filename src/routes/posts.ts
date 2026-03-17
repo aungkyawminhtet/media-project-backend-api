@@ -9,12 +9,11 @@ import {
   getPostByUserId,
   getPagination,
   getPostByTag,
-  addLike,
-  removeLike,
+  toggleLike
 } from "../controllers/posts";
 
 import { validateParam, validateToken, validator } from "../utls/validator";
-import { catSchema, postSchema } from "../utls/schema";
+import { AllSchema, catSchema, postSchema } from "../utls/schema";
 import { saveFile } from "../utls/saveFiles";
 
 const router = express.Router();
@@ -25,18 +24,19 @@ router.get("/byCat/:catId", getCatById);
 router.get("/byUser/:userId", getPostByUserId);
 router.get("/byTag/:tagId", getPostByTag);
 
-router.get(
-  "/like/add/:id",
+router.patch(
+  "/like/toggle/:id/:toggleLike",
   validateParam(catSchema.paramSchema, "id"),
   validateToken,
-  addLike,
+  toggleLike,
 );
-router.get(
-  "/like/remove/:id",
-  validateParam(catSchema.paramSchema, "id"),
-  validateToken,
-  removeLike,
-);
+
+// router.get(
+//   "/like/remove/:id",
+//   validateParam(catSchema.paramSchema, "id"),
+//   validateToken,
+//   removeLike,
+// );
 
 router.post("/", [
   validateToken,
@@ -45,7 +45,7 @@ router.post("/", [
   createPost,
 ]);
 
-router.get("/paginate/:page", getPagination);
+router.get("/paginate/:page",[validateParam(AllSchema.pageSchema, "page"), getPagination]);
 
 router
   .route("/:id")

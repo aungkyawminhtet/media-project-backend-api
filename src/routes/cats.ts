@@ -109,7 +109,7 @@ router.post("/",[validateToken, saveFile, validator(catSchema.bodySchema), creat
  *                 user:
  *                   type: string   
  */
-router.get("/:id",validateParam(catSchema.paramSchema, "id"), getCatById);
+router.get("/:id",validateParam(catSchema.paramSchema, "id"),validateToken, getCatById);
 
 /**
  * @swagger
@@ -159,8 +159,7 @@ router.get("/:id",validateParam(catSchema.paramSchema, "id"), getCatById);
  */
 
 
-router.patch("/:id", [validateToken, saveFile, validateParam(catSchema.paramSchema, "id"), updateCat]);
-
+router.patch("/:id", [validateToken, saveFile, validateParam(catSchema.paramSchema, "id"),validateToken, updateCat]);
 
 /**
  * @swagger

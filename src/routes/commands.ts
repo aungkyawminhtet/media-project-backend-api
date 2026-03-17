@@ -83,7 +83,7 @@ router.post(
  *       200:
  *         description: Success
  */
-router.get("/byPost/:postId", getCommandsByPostId);
+router.get("/byPost/:postId",[validateParam(catSchema.paramSchema, "id"), validateToken ,getCommandsByPostId]);
 
 /**
  * @swagger
