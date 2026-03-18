@@ -1,5 +1,12 @@
 # Media BackEnd Api
 
+### [Demo](https://media-project-backend-api.onrender.com/api-docs/)
+
+### Base URL from render
+```
+https://media-project-backend-api.onrender.com/
+```
+
 ### Copy env file and setup
 ```
 cp .env_example .env
@@ -10,7 +17,7 @@ cp .env_example .env
 npm run dev
 ```
 
-### Api Document with Swagger Ui
+### Api Document with Swagger Ui for local url
 
 After run Server, Can check Api usage in follow link.
 
