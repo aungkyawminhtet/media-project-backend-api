@@ -27,6 +27,7 @@ const login = async (req, res, next) => {
             ...user.toObject(),
             token: createToken
         };
+        delete result.password;
         (0, helper_1.fMs)(res, "User logged in successfully", result);
     }
     else {

@@ -18,6 +18,7 @@ npm i --save-dev @types/jsonwebtoken
 npm i swagger-ui-express
 npm i swagger-jsdoc
 npm install @supabase/supabase-js
+npm i --save-dev @types/cors
 
 //modify package.json scripts
 "scripts": {

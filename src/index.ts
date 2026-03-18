@@ -3,15 +3,19 @@ import express, { ErrorRequestHandler, NextFunction, Request, Response } from 'e
 import path from 'path';
 import { DbConnect } from './utls/dbConnect';
 import { swaggerSpec } from './utls/swaggerUi';
+import cors from 'cors';
 
 const swaggerUi = require('swagger-ui-express');
 
 const uploadFile = require('express-fileupload');
 
 const app = express();
+
+app.use(cors());
 app.use(express.json());
 app.use(uploadFile());
 app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
+
 
 DbConnect();
 

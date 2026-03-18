@@ -8,9 +8,11 @@ const express_1 = __importDefault(require("express"));
 const path_1 = __importDefault(require("path"));
 const dbConnect_1 = require("./utls/dbConnect");
 const swaggerUi_1 = require("./utls/swaggerUi");
+const cors_1 = __importDefault(require("cors"));
 const swaggerUi = require('swagger-ui-express');
 const uploadFile = require('express-fileupload');
 const app = (0, express_1.default)();
+app.use((0, cors_1.default)());
 app.use(express_1.default.json());
 app.use(uploadFile());
 app.use('/uploads', express_1.default.static(path_1.default.join(__dirname, '../uploads')));
@@ -19,9 +21,13 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerUi_1.swaggerSpec));
 const userRouter = require('./routes/users');
 const postRouter = require('./routes/posts');
 const catRouter = require('./routes/cats');
+const tagRouter = require("./routes/tag");
+const commandRouter = require("./routes/commands");
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/posts', postRouter);
 app.use('/api/v1/cats', catRouter);
+app.use('/api/v1/tags', tagRouter);
+app.use('/api/v1/commands', commandRouter);
 app.use((err, req, res, next) => {
     const status = err.status || 200;
     res.status(status).json({

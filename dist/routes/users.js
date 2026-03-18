@@ -8,12 +8,12 @@ const users_1 = require("../controllers/users");
 const schema_1 = require("../utls/schema");
 const validator_1 = require("../utls/validator");
 const router = express_1.default.Router();
-// /**
-//  * @swagger
-//  * tags:
-//  *   name: Users Login
-//  *   description: User management
-//  */
+/**
+ * @swagger
+ * tags:
+ *   name: Users Login
+ *   description: User management
+ */
 /**
  * @swagger
  * /api/v1/users/register:
@@ -27,10 +27,13 @@ const router = express_1.default.Router();
  *           schema:
  *             type: object
  *             required:
+ *               - name
  *               - email
  *               - password
  *               - phone
  *             properties:
+ *               name:
+ *                 type: string
  *               email:
  *                 type: string
  *               password:
@@ -80,7 +83,18 @@ router.post("/login", [(0, validator_1.validator)(schema_1.userSchema.loginSchem
  *             schema:
  *               type: array
  *               items:
- *                 $ref: '#/components/schemas/User'
+ *                 type: object
+ *                 properties:
+ *                   _id:
+ *                     type: string
+ *                   name:
+ *                     type: string
+ *                   email:
+ *                     type: string
+ *                   phone:
+ *                     type: string
+ *                   createdAt:
+ *                     type: string
  */
 /**
  * @swagger
@@ -98,15 +112,38 @@ router.get("/", users_1.getall);
  *       required: true
  *       content:
  *         application/json:
- *           schema:
- *             $ref: '#/components/schemas/User'
+ *          schema:
+ *             type: object
+ *             required:
+ *               - name
+ *               - email
+ *               - password
+ *               - phone
+ *             properties:
+ *               name:
+ *                 type: string
+ *               email:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *               phone:
+ *                 type: string
  *     responses:
  *       201:
  *         description: User created successfully
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/User'
+ *               type: object
+ *               properties:
+ *                 _id:
+ *                   type: string
+ *                 name:
+ *                   type: string
+ *                 email:
+ *                   type: string
+ *                 phone:
+ *                   type: string
  */
 router.post("/", users_1.createUser);
 /** @swagger
@@ -127,7 +164,16 @@ router.post("/", users_1.createUser);
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/User'
+ *               type: object
+ *               properties:
+ *                 _id:
+ *                   type: string
+ *                 name:
+ *                   type: string
+ *                 email:
+ *                   type: string
+ *                 phone:
+ *                   type: string
  */
 router.get("/:id", users_1.getUserbByid);
 /** @swagger
@@ -147,14 +193,35 @@ router.get("/:id", users_1.getUserbByid);
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/User'
+ *             type: object
+ *             required:
+ *               - email
+ *               - password
+ *               - phone
+ *             properties:
+ *               email:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *               phone:
+ *                 type: string
  *     responses:
  *       200:
  *         description: User updated successfully
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/User'
+ *               type: object
+ *               properties:
+ *                 _id:
+ *                   type: string
+ *                 name:
+ *                   type: string
+ *                 email:
+ *                   type: string
+ *                 phone:
+ *                   type: string
+ *
  */
 router.patch("/:id", users_1.updateUser);
 /** @swagger

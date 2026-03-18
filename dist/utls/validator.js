@@ -36,18 +36,24 @@ const validateParam = (schema, name) => {
 };
 exports.validateParam = validateParam;
 const validateToken = async (req, res, next) => {
+    if (!req.headers.authorization) {
+        next(new Error("unauthorized  Error"));
+    }
     let token = req.headers.authorization?.split(" ")[1];
-    let scecrectKey = process.env.SECRET_KEY || 'secrectkey';
+    let scecrectKey = process.env.SECRET_KEY || "secrectkey";
     if (!token) {
         next(new Error("unauthorized user one"));
     }
-    const user = jsonwebtoken_1.default.decode(token, scecrectKey);
+    let user = jsonwebtoken_1.default.decode(token, scecrectKey);
     if (!user) {
         next(new Error("unauthorized user two"));
     }
-    const findUser = await DB.findById(user._id).select("-password -__v");
-    req.body["user"] = findUser;
-    // console.log(req.body);
+    let findUser = await DB.findById(user._id).select("-password -__v");
+    // console.log("auth user ", findUser);
+    //   console.log("auth user ");
+    if (req.body) {
+        req.body.user = findUser;
+    }
     next();
 };
 exports.validateToken = validateToken;
