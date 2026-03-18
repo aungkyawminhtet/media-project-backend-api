@@ -24,10 +24,13 @@ const login = async(req: Request, res: Response, next: NextFunction) => {
     const check = decode(req.body.password, user.password);
     if (check) {
         let createToken = token(user.toObject());
+
         const result = {
             ...user.toObject(),
             token: createToken
         }
+        delete result.password;
+
         fMs(res, "User logged in successfully", result);
     } else {
         next(new Error("Invalid password"));

@@ -36,6 +36,8 @@ router.get("/", getAllCommands);
  *   post:
  *     summary: Create new command
  *     tags: [Commands]
+ *     security:
+ *       - bearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -73,6 +75,8 @@ router.post(
  *   get:
  *     summary: Get commands by post id
  *     tags: [Commands]
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: postId
@@ -83,7 +87,11 @@ router.post(
  *       200:
  *         description: Success
  */
-router.get("/byPost/:postId",[validateParam(catSchema.paramSchema, "id"), validateToken ,getCommandsByPostId]);
+router.get("/byPost/:postId", [
+  validateParam(catSchema.paramSchema, "id"),
+  validateToken,
+  getCommandsByPostId,
+]);
 
 /**
  * @swagger
@@ -109,6 +117,8 @@ router.get("/:id", validateParam(catSchema.paramSchema, "id"), getCommandsById);
  *   patch:
  *     summary: Update command
  *     tags: [Commands]
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -165,6 +175,8 @@ router.patch(
  *   delete:
  *     summary: Delete command
  *     tags: [Commands]
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id

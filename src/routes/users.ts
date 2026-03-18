@@ -1,7 +1,15 @@
-import express, { NextFunction, Request, Response } from 'express';
-import { getall, createUser, updateUser, getUserbByid, deleteUser, register, login } from '../controllers/users';
-import { userSchema } from '../utls/schema';
-import { validator } from '../utls/validator';
+import express, { NextFunction, Request, Response } from "express";
+import {
+  getall,
+  createUser,
+  updateUser,
+  getUserbByid,
+  deleteUser,
+  register,
+  login,
+} from "../controllers/users";
+import { userSchema } from "../utls/schema";
+import { validator } from "../utls/validator";
 const router = express.Router();
 
 /**
@@ -10,7 +18,6 @@ const router = express.Router();
  *   name: Users Login
  *   description: User management
  */
-
 
 /**
  * @swagger
@@ -42,7 +49,7 @@ const router = express.Router();
  *       201:
  *         description: User registered successfully
  */
-router.post("/register", [validator(userSchema.bodySchema),register]);
+router.post("/register", [validator(userSchema.bodySchema), register]);
 
 /**
  * @swagger
@@ -69,7 +76,7 @@ router.post("/register", [validator(userSchema.bodySchema),register]);
  *         description: User logged in successfully
  */
 
-router.post("/login", [validator(userSchema.loginSchema),login]);
+router.post("/login", [validator(userSchema.loginSchema), login]);
 
 /** @swagger
  * /api/v1/users:
@@ -83,20 +90,19 @@ router.post("/login", [validator(userSchema.loginSchema),login]);
  *           application/json:
  *             schema:
  *               type: array
- *               required:
- *                 - name
- *                 - email
- *                 - phone
- *                 - createdAt
- *               properties:
- *                 name:
- *                   type: string
- *                 email:
- *                   type: string
- *                 phone:
- *                   type: string
- *                 createdAt:
- *                   type: string                
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   _id:
+ *                     type: string
+ *                   name:
+ *                     type: string
+ *                   email:
+ *                     type: string
+ *                   phone:
+ *                     type: string
+ *                   createdAt:
+ *                     type: string
  */
 
 /**
@@ -106,9 +112,9 @@ router.post("/login", [validator(userSchema.loginSchema),login]);
  *   description: User management
  */
 
-router.get("/",getall);
+router.get("/", getall);
 
-/** @swagger    
+/** @swagger
  * /api/v1/users:
  *   post:
  *     summary: Create a new user
@@ -139,18 +145,16 @@ router.get("/",getall);
  *         content:
  *           application/json:
  *             schema:
- *             type: object
- *             required:
- *               - email
- *               - password
- *               - phone
- *             properties:
- *               email:
- *                 type: string
- *               password:
- *                 type: string
- *               phone:
- *                 type: string
+ *               type: object
+ *               properties:
+ *                 _id:
+ *                   type: string
+ *                 name:
+ *                   type: string
+ *                 email:
+ *                   type: string
+ *                 phone:
+ *                   type: string
  */
 
 router.post("/", createUser);
@@ -173,9 +177,17 @@ router.post("/", createUser);
  *         content:
  *           application/json:
  *             schema:
- *               Users:
- *                 type: object
- */ 
+ *               type: object
+ *               properties:
+ *                 _id:
+ *                   type: string
+ *                 name:
+ *                   type: string
+ *                 email:
+ *                   type: string
+ *                 phone:
+ *                   type: string
+ */
 router.get("/:id", getUserbByid);
 
 /** @swagger
@@ -201,7 +213,7 @@ router.get("/:id", getUserbByid);
  *               - password
  *               - phone
  *             properties:
- *               email: 
+ *               email:
  *                 type: string
  *               password:
  *                 type: string
@@ -214,18 +226,16 @@ router.get("/:id", getUserbByid);
  *           application/json:
  *             schema:
  *               type: object
- *             required:
- *               - email
- *               - password
- *               - phone
- *             properties:
- *               email: 
- *                 type: string
- *               password:
- *                 type: string
- *               phone:
- *                 type: string
- *              
+ *               properties:
+ *                 _id:
+ *                   type: string
+ *                 name:
+ *                   type: string
+ *                 email:
+ *                   type: string
+ *                 phone:
+ *                   type: string
+ *
  */
 router.patch("/:id", updateUser);
 
@@ -234,15 +244,15 @@ router.patch("/:id", updateUser);
  *   delete:
  *     summary: Delete a user by ID
  *     tags: [Users]
- *     parameters:         
- *       - in: path 
+ *     parameters:
+ *       - in: path
  *         name: id
  *         required: true
  *         schema:
  *           type: string
  *         description: The user ID
  *     responses:
- *       200:       
+ *       200:
  *         description: User deleted successfully
  */
 router.delete("/:id", deleteUser);

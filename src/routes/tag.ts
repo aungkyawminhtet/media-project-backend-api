@@ -36,6 +36,8 @@ router.get("/", GetAllTag);
  *   post:
  *     summary: Create tag
  *     tags: [Tags]
+ *     security:
+ *       - bearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -44,11 +46,11 @@ router.get("/", GetAllTag);
  *             type: object
  *             required:
  *               - name
- *               - image
+ *               - photo
  *             properties:
  *               name:
  *                 type: string
- *               image:
+ *               photo:
  *                 type: string
  *                 format: binary
  *     responses:
@@ -62,7 +64,6 @@ router.post(
   validator(tagSchema.bodySchema),
   CreateTag,
 );
-
 
 /**
  * @swagger
@@ -82,13 +83,14 @@ router.post(
  */
 router.get("/:id", validateParam(catSchema.paramSchema, "id"), GetTagById);
 
-
 /**
  * @swagger
  * /api/v1/tags/{id}:
  *   patch:
  *     summary: Update tag
  *     tags: [Tags]
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -103,7 +105,7 @@ router.get("/:id", validateParam(catSchema.paramSchema, "id"), GetTagById);
  *             properties:
  *               name:
  *                 type: string
- *               image:
+ *               photo:
  *                 type: string
  *                 format: binary
  *     responses:
@@ -123,6 +125,8 @@ router.patch(
  *   delete:
  *     summary: Delete tag
  *     tags: [Tags]
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id

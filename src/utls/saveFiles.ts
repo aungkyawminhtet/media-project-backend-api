@@ -16,8 +16,10 @@ export const saveFile = async (
 ) => {
   try {
 
+    // console.log(req);
+
     if (!req.files || !req.files.photo) {
-      return res.status(400).json({ message: "No file uploaded" });
+      return res.status(400).json({ message: "No file uploaded in this files" });
     }
 
     const photo = req.files?.photo as fileUpload.UploadedFile;
