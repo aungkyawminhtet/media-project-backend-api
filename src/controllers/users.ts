@@ -38,13 +38,16 @@ const login = async(req: Request, res: Response, next: NextFunction) => {
 }
 
 const getall = async(req: Request, res : Response, next: NextFunction) => {
-    const users = await DB.find();
+    const users = await DB.find().select("name email phone");
     fMs(res, "All users fetched successfully", users);
 };
 
 const getUserbByid = async(req: Request, res: Response, next: NextFunction) => {
     const id = req.params.id;
-    const user = await DB.findById(id);
+    const user = await DB.findById(id).select("name email phone");
+    if(!user){
+        return next(new Error("User not found with that id!"));
+    }
     fMs(res, "User fetched successfully", user);
 };
 
@@ -66,6 +69,10 @@ const updateUser = async (req: Request, res: Response, next: NextFunction) => {
 
 const deleteUser = async (req: Request, res: Response, next: NextFunction) => {
     const id = req.params.id;
+    const user = await DB.findById(id);
+    if(!user){
+        return next(new Error("User not found"));
+    }
     await DB.findByIdAndDelete(id);
     fMs(res, "User deleted successfully", []);
 };

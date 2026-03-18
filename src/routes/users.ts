@@ -255,7 +255,7 @@ router.patch("/:id", updateUser);
  *       200:
  *         description: User deleted successfully
  */
-router.delete("/:id", deleteUser);
+router.delete("/:id",deleteUser);
 
 // router.route("/:id")
 //     .get(getUserbByid)
