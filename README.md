@@ -1,55 +1,142 @@
-# Media BackEnd Api
+# Media Backend API
 
-### [Demo](https://media-project-backend-api.onrender.com/api-docs/)
+### 📌 [Live Demo](https://media-project-backend-api.onrender.com/api-docs/)
 
-### Base URL from render
+### 🌐 Base URL (Production)
+
 ```
 https://media-project-backend-api.onrender.com/
 ```
 
-### Copy env file and setup
-```
-cp .env_example .env
-```
+---
 
-### Server Run
-```
+## 📋 Getting Started
+
+### Prerequisites
+
+- Node.js (v14 or higher)
+- npm or yarn
+- MongoDB or other supported database
+
+### Installation
+
+1. **Clone the repository**
+
+   ```bash
+   git clone <repository-url>
+   cd nodejs-basic
+   ```
+
+2. **Install dependencies**
+
+   ```bash
+   npm install
+   ```
+
+3. **Setup environment variables**
+
+   ```bash
+   cp .env_example .env
+   ```
+
+   Update the `.env` file with your database credentials and other configurations.
+
+4. **Configure MongoDB/Database**
+   Update your database connection string in the `.env` file.
+
+### Running the Server
+
+```bash
 npm run dev
 ```
 
-### Api Document with Swagger Ui for local url
+The server will start and listen on `http://localhost:3000`
 
-After run Server, Can check Api usage in follow link.
+### API Documentation
+
+After starting the server, access the Swagger UI documentation at:
 
 ```
 http://localhost:3000/api-docs/
 ```
 
-### Mongo DB setup
-You need to connect mongo Db or other database connections.
+---
 
+## 📚 About the Project
 
-### About the Project
+_This is a learning-focused Backend mini project._
 
-*This is my own learning Backend mini project.*
+### Key Features
 
-First, This project need to do register and login. This method used authenication with Jwt and Bcrypt. And protect other routes with middleware Token.
+- **User Authentication**: Register and login functionality
+- **Security**:
+  - JWT (JSON Web Tokens) for authentication
+  - Bcrypt for password hashing
+  - Middleware token protection on secured routes
+- **Database**: MongoDB integration with Mongoose ORM
+- **File Upload**: Express file upload support
+- **API Documentation**: Swagger UI integration
+- **Input Validation**: Joi schema validation
 
-#### Using Third party library
-*I used all of library that show under the instruction.*
-- npm install @types/express --save-dev
-- npm install --save-dev nodemon
--  npm i dotenv
--  npm i mongoose
--  npm i express-fileupload
--  npm install --save-dev @types/express-fileupload
--  npm i joi
--  npm i bcryptjs
--  npm i jsonwebtoken
--  npm i --save-dev @types/jsonwebtoken
--  npm i swagger-ui-express
--  npm i swagger-jsdoc
+### Project Structure
 
-####Reference
+```
+src/
+├── index.ts                 # Main entry point
+├── supabaseClient.ts        # Supabase configuration
+├── controllers/             # Route handlers and business logic
+│   ├── cats.ts
+│   ├── commands.ts
+│   ├── posts.ts
+│   ├── tag.ts
+│   └── users.ts
+├── dbs/                     # Database models/schemas
+│   ├── cats.ts
+│   ├── commands.ts
+│   ├── posts.ts
+│   ├── tag.ts
+│   └── users.ts
+├── routes/                  # API routes
+│   ├── cats.ts
+│   ├── commands.ts
+│   ├── posts.ts
+│   ├── tag.ts
+│   └── users.ts
+└── utls/                    # Utilities
+    ├── dbConnect.ts         # Database connection
+    ├── helper.ts            # Helper functions
+    ├── saveFiles.ts         # File saving utilities
+    ├── schema.ts            # Joi validation schemas
+    ├── swaggerUi.ts         # Swagger configuration
+    └── validator.ts         # Validation middleware
+```
 
-***Brighter Myanmar(Waiferkolar)***
+---
+
+## 📦 Dependencies
+
+### Core Dependencies
+
+- `express` - Web framework
+- `mongoose` - MongoDB ORM
+- `dotenv` - Environment variables
+- `jsonwebtoken` - JWT authentication
+- `bcryptjs` - Password hashing
+- `joi` - Schema validation
+- `express-fileupload` - File upload handling
+- `swagger-ui-express` - API documentation UI
+- `swagger-jsdoc` - Swagger/OpenAPI spec generation
+
+### Development Dependencies
+
+- `@types/express` - TypeScript types for Express
+- `@types/express-fileupload` - TypeScript types for file upload
+- `@types/jsonwebtoken` - TypeScript types for JWT
+- `nodemon` - Development server auto-reload
+- `typescript` - TypeScript compiler
+
+---
+
+## 🔗 Reference
+
+**_Credit: Brighter Myanmar (Waiferkolar)_**
